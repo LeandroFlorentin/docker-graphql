@@ -47,4 +47,4 @@ jobs:
         NEW_VERSION: ${{ steps.version.outputs.version }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: |
-        docker push $DOCKER_USER/docker-graphql$NEW_VERSION
+        docker push $DOCKER_USER/docker-graphql:$NEW_VERSION
