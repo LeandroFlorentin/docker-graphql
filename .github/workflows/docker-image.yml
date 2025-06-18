@@ -36,3 +36,4 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
       run: |
         docker push $DOCKER_USER/docker-graphql:2.0.0
+        docker push $DOCKER_USER/docker-graphql:latest
