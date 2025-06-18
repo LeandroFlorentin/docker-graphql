@@ -35,14 +35,16 @@ jobs:
         docker login -u $DOCKER_USER --password $DOCKER_PASSWORD
         echo "NEW VERSION: $NEW_VERSION !!!!!"
 
-    #- name: Build docker image
-      #env:
-        #DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      #run: |
-        #docker build -t $DOCKER_USER/docker-graphql:latest .
+    - name: Build docker image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      run: |
+        docker build -t $DOCKER_USER/docker-graphql:$NEW_VERSION .
 
-    #- name: Push Docker Image
-      #env:
-        #DOCKER_USER: ${{ secrets.DOCKER_USER }}
-      #run: |
-        #docker push $DOCKER_USER/docker-graphql:latest
+    - name: Push Docker Image
+      env:
+        NEW_VERSION: ${{ steps.version.outputs.version }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      run: |
+        docker push $DOCKER_USER/docker-graphql$NEW_VERSION
